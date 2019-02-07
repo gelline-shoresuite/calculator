@@ -16,7 +16,7 @@ class App extends Component {
     this.setState({firstNumber: this.state.firstNumber + event.target.value});
   }
 
-  clearNumber = (event) =>{
+  clearNumber = () =>{
     this.setState({firstNumber: "", secondNumber: ""});
   }
 
@@ -26,10 +26,6 @@ class App extends Component {
         secondNumber: this.state.firstNumber,
         firstNumber: '',
         setCalcu: event.target.value,
-      },() =>{
-        console.log("Second Number: " + this.state.secondNumber);
-        console.log("First Number: " + this.state.firstNumber);
-        console.log("Equation: " + this.state.setCalcu);
       });
     }else{
       switch(this.state.setCalcu){
