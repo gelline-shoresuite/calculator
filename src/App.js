@@ -17,13 +17,52 @@ class App extends Component {
   }
 
   clearNumber = (event) =>{
-    this.setState({firstNumber: ""});
+    this.setState({firstNumber: "", secondNumber: ""});
   }
 
-  doThem = (event) =>{
-    if(event.target.value == 'divide'){
-      
+  equation = (event) =>{
+    if(event.target.value !== "equals"){
+      this.setState({
+        secondNumber: this.state.firstNumber,
+        firstNumber: '',
+        setCalcu: event.target.value,
+      },() =>{
+        console.log("Second Number: " + this.state.secondNumber);
+        console.log("First Number: " + this.state.firstNumber);
+        console.log("Equation: " + this.state.setCalcu);
+      });
+    }else{
+      switch(this.state.setCalcu){
+
+        case "divide":
+          this.setState({
+            firstNumber: parseInt(this.state.secondNumber) / parseInt(this.state.firstNumber),
+          })
+          break;
+
+        case "plus":
+          this.setState({
+            firstNumber: parseInt(this.state.secondNumber) + parseInt(this.state.firstNumber),
+          })
+          break;
+
+        case "minus":
+          this.setState({
+            firstNumber: parseInt(this.state.secondNumber) - parseInt(this.state.firstNumber),
+          })
+          break;
+
+        case "multiply":
+          this.setState({
+            firstNumber: parseInt(this.state.secondNumber) * parseInt(this.state.firstNumber),
+          })
+          break;
+
+        default: 
+          break;
+      }
     }
+    
   }
 
 
@@ -40,25 +79,25 @@ class App extends Component {
               <td><button value="1" onClick={this.addNumber}>1</button></td>
               <td><button value="2" onClick={this.addNumber}>2</button></td>
               <td><button value="3" onClick={this.addNumber}>3</button></td>
-              <td><button value="divide">/</button></td>
+              <td><button value="divide" onClick={this.equation}>/</button></td>
             </tr>
             <tr>
               <td><button value="4" onClick={this.addNumber}>4</button></td>
               <td><button value="5" onClick={this.addNumber}>5</button></td>
               <td><button value="6" onClick={this.addNumber}>6</button></td>
-              <td><button value="plus">+</button></td>
+              <td><button value="plus" onClick={this.equation}>+</button></td>
             </tr>
             <tr>
               <td><button value="7" onClick={this.addNumber}>7</button></td>
               <td><button value="8" onClick={this.addNumber}>8</button></td>
               <td><button value="9" onClick={this.addNumber}>9</button></td>
-              <td><button value="minus">-</button></td>
+              <td><button value="minus" onClick={this.equation}>-</button></td>
             </tr>
             <tr>
               <td><button value="" onClick={this.clearNumber}>clear</button></td>
               <td><button value="0" onClick={this.addNumber}>0</button></td>
-              <td><button value="equals">=</button></td>
-              <td><button value="multiply">*</button></td>
+              <td><button value="equals" onClick={this.equation}>=</button></td>
+              <td><button value="multiply" onClick={this.equation}>*</button></td>
             </tr>
 
           </tbody>
